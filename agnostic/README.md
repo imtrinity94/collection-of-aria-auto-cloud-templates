@@ -1,12 +1,12 @@
 # agnostic
 
-## 📁 Sub-Categories & Blueprints
+## 📁 Blueprints & Categories
 
-| Name | Link |
-| :--- | :--- |
-| Agnostic Single Machine | [View Details](./cloud-agnostic-machine/) |
-| Cloud Agnostic Windows Machine | [View Details](./cloud-agnostic-windows-machine/) |
-| Windows-IIS-Machine | [View Details](./windows-iis-machine/) |
+| Name | Description | Link |
+| :--- | :--- | :--- |
+| Agnostic Single Machine | Provisions Machine, Network. | [View Details](./cloud-agnostic-machine/) |
+| Cloud Agnostic Windows Machine | Provisions Machine, Network. | [View Details](./cloud-agnostic-windows-machine/) |
+| Windows-IIS-Machine | Provisions Machine, Network. | [View Details](./windows-iis-machine/) |
 
 ---
-[⬅️ Back to Root](../README.md)
+[🏠 Back to Root](../README.md) | [⬅️ Back to Parent](../README.md)

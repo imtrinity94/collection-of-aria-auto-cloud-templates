@@ -1,11 +1,11 @@
 # apps
 
-## 📁 Sub-Categories & Blueprints
+## 📁 Blueprints & Categories
 
-| Name | Link |
-| :--- | :--- |
-| Web Application v1 | [View Details](./web application v1/) |
-| Web Application v2 | [View Details](./web application v2/) |
+| Name | Description | Link |
+| :--- | :--- | :--- |
+| Web Application v1 | Provisions LoadBalancer, Machine, Network. | [View Details](./web application v1/) |
+| Web Application v2 | Provisions LoadBalancer, Machine, Network. | [View Details](./web application v2/) |
 
 ---
-[⬅️ Back to Root](../README.md)
+[🏠 Back to Root](../README.md) | [⬅️ Back to Parent](../README.md)

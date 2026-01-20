@@ -1,8 +1,11 @@
 # Single VM
 
+### 🚀 Overview
+Single VM, No Networks
+
 **Version:** `2`
 
-## 📝 Description
+## 📝 Detailed Description
 Single VM, No Networks
 
 ## 🛠️ Technologies
@@ -28,4 +31,4 @@ Single VM, No Networks
 - [blueprint.yaml](./blueprint.yaml)
 
 ---
-[⬅️ Back to Parent](../README.md)
+[🏠 Back to Root](../../README.md) | [⬅️ Back to Parent](../README.md)

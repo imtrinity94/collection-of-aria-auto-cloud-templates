@@ -1,10 +1,10 @@
 # centos
 
-## 📁 Sub-Categories & Blueprints
+## 📁 Blueprints & Categories
 
-| Name | Link |
-| :--- | :--- |
-| CentOS Machine | [View Details](./centos-gold-server/) |
+| Name | Description | Link |
+| :--- | :--- | :--- |
+| CentOS Machine | Provisions Machine, Network. | [View Details](./centos-gold-server/) |
 
 ---
-[⬅️ Back to Root](../README.md)
+[🏠 Back to Root](../README.md) | [⬅️ Back to Parent](../README.md)

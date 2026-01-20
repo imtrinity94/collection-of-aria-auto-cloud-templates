@@ -1,8 +1,11 @@
 # Two Tier Linux Application - Type 4
 
+### 🚀 Overview
+Two tier Linux application on routed NSX networks with Load Balancer. Automated naming based on role.
+
 **Version:** `1`
 
-## 📝 Description
+## 📝 Detailed Description
 Two tier Linux application on routed NSX networks with Load Balancer. Automated naming based on role.
 
 ## 🛠️ Technologies
@@ -38,4 +41,4 @@ Two tier Linux application on routed NSX networks with Load Balancer. Automated 
 - [blueprint.yaml](./blueprint.yaml)
 
 ---
-[⬅️ Back to Parent](../README.md)
+[🏠 Back to Root](../../README.md) | [⬅️ Back to Parent](../README.md)

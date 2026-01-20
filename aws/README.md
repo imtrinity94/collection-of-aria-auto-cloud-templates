@@ -1,10 +1,10 @@
 # aws
 
-## 📁 Sub-Categories & Blueprints
+## 📁 Blueprints & Categories
 
-| Name | Link |
-| :--- | :--- |
-| Alexa Agnostic Single Machine | [View Details](./alexa-demo/) |
+| Name | Description | Link |
+| :--- | :--- | :--- |
+| Alexa Agnostic Single Machine | Provisions Machine. | [View Details](./alexa-demo/) |
 
 ---
-[⬅️ Back to Root](../README.md)
+[🏠 Back to Root](../README.md) | [⬅️ Back to Parent](../README.md)

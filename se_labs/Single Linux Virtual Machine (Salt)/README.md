@@ -1,5 +1,8 @@
 # Single Linux Virtual Machine (Salt)
 
+### 🚀 Overview
+Provisions Machine, Network.
+
 **Version:** `1.0.0`
 
 ## 🛠️ Technologies
@@ -25,4 +28,4 @@
 - [blueprint.yaml](./blueprint.yaml)
 
 ---
-[⬅️ Back to Parent](../README.md)
+[🏠 Back to Root](../../README.md) | [⬅️ Back to Parent](../README.md)

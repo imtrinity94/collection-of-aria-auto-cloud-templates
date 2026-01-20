@@ -10,6 +10,35 @@ def parse_blueprint(filepath):
         print(f"Error parsing {filepath}: {e}")
         return None
 
+def summarize_blueprint(data):
+    if not data or not isinstance(data, dict):
+        return "No description available."
+    
+    # Use description if it exists
+    desc = data.get('description', '')
+    if desc:
+        # Take the first one or two lines and sanitize
+        lines = desc.strip().split('\n')
+        summary = " ".join(lines[:2])
+        if len(summary) > 150:
+            summary = summary[:147] + "..."
+        return summary
+
+    # Otherwise, summarize based on resources
+    resources = data.get('resources', {})
+    if isinstance(resources, dict) and resources:
+        res_types = []
+        for r in resources.values():
+            if isinstance(r, dict):
+                rtype = r.get('type', '').split('.')[-1]
+                if rtype and rtype not in res_types:
+                    res_types.append(rtype)
+        
+        if res_types:
+            return f"Provisions {', '.join(res_types[:3])}{' and more' if len(res_types) > 3 else ''}."
+    
+    return "VMware Aria Automation template."
+
 def generate_folder_readme(path, subdirs, files, relative_path):
     readme_path = os.path.join(path, "README.md")
     
@@ -28,20 +57,37 @@ def generate_folder_readme(path, subdirs, files, relative_path):
     content = f"# {title}\n\n"
     
     if not relative_path:
+        content += "![Banner](./aria_automation_banner.png)\n\n"
         content += "Welcome to the collection of VMware Aria Automation (formerly Cloud Assembly) cloud templates. This repository serves as a centralized library for various infrastructure-as-code blueprints.\n\n"
-        content += "## 📂 Navigation\n\n"
-        content += "| Category | Description |\n"
-        content += "| :--- | :--- |\n"
+        content += "## 🚀 Overview\n\n"
+        content += "This collection provides a wide variety of templates ranging from simple single-machine deployments to complex multi-tier applications, including:\n"
+        content += "- **Cloud Agnostic**: Templates that work across AWS, Azure, and vSphere.\n"
+        content += "- **Application Stacks**: Web applications, SQL servers, and more.\n"
+        content += "- **Kubernetes**: On-demand cluster and namespace provisioning.\n"
+        content += "- **SE Labs**: Specialized lab environments and test beds.\n\n"
+        content += "## 🔧 Usage\n\n"
+        content += "1. **Browse** the categories below to find a template that fits your needs.\n"
+        content += "2. **Review** the `blueprint.yaml` and the corresponding documentation.\n"
+        content += "3. **Import** the YAML content into your Aria Automation environment.\n"
+        content += "4. **Configure** the required inputs as documented in each README.\n\n"
+        content += "## 📂 Repository Structure\n\n"
         
-        # We'll fill this in later or just use the list below
+    # Maintenance Note for Root
+    if not relative_path:
+        content += "## 🛠️ Maintenance\n\n"
+        content += "The documentation in this repository is automatically generated using the `generate_readmes.py` script. To update the README files after making changes to the blueprints:\n\n"
+        content += "```bash\npython generate_readmes.py\n```\n\n"
     
     if blueprint_data and isinstance(blueprint_data, dict):
+        content += f"### 🚀 Overview\n"
+        content += f"{summarize_blueprint(blueprint_data)}\n\n"
+        
         version = blueprint_data.get('version', '1.0.0')
         content += f"**Version:** `{version}`\n\n"
         
         description = blueprint_data.get('description', '')
         if description:
-            content += f"## 📝 Description\n{description}\n\n"
+            content += f"## 📝 Detailed Description\n{description}\n\n"
         
         # Resources Summary
         resources = blueprint_data.get('resources', {})
@@ -86,23 +132,26 @@ def generate_folder_readme(path, subdirs, files, relative_path):
     # Subdirectories
     valid_subdirs = sorted([sd for sd in subdirs if not sd.startswith('.') and sd not in ['icons']])
     if valid_subdirs:
-        content += "## 📁 Sub-Categories & Blueprints\n\n"
-        content += "| Name | Link |\n"
-        content += "| :--- | :--- |\n"
+        content += "## 📁 Blueprints & Categories\n\n"
+        content += "| Name | Description | Link |\n"
+        content += "| :--- | :--- | :--- |\n"
         for sd in valid_subdirs:
             sd_path = os.path.join(path, sd)
             sd_bp = os.path.join(sd_path, "blueprint.yaml")
             display_name = sd
+            summary = "Directory containing templates or sub-categories."
+            
             if os.path.exists(sd_bp):
                 sd_data = parse_blueprint(sd_bp)
-                if sd_data and isinstance(sd_data, dict) and 'name' in sd_data:
-                    display_name = sd_data['name']
+                if sd_data and isinstance(sd_data, dict):
+                    display_name = sd_data.get('name', sd)
+                    summary = summarize_blueprint(sd_data)
             
-            content += f"| {display_name} | [View Details](./{sd}/) |\n"
+            content += f"| {display_name} | {summary} | [View Details](./{sd}/) |\n"
         content += "\n"
     
     # Files
-    valid_files = sorted([f for f in files if f != "README.md" and not f.startswith('.') and f != "generate_readmes.py"])
+    valid_files = sorted([f for f in files if f != "README.md" and not f.startswith('.') and f != "generate_readmes.py" and not f.endswith('.png')])
     if valid_files:
         content += "## 📄 Files\n"
         for f in valid_files:
@@ -110,7 +159,12 @@ def generate_folder_readme(path, subdirs, files, relative_path):
         content += "\n"
         
     if relative_path:
-        content += "---\n[⬅️ Back to Root](../README.md)" if os.path.dirname(relative_path) == "" else f"---\n[⬅️ Back to Parent](../README.md)"
+        # Determine how many levels up to go for the root link
+        levels = len(relative_path.split(os.sep))
+        root_link = "../" * levels + "README.md"
+        parent_link = "../README.md"
+        
+        content += f"---\n[🏠 Back to Root]({root_link}) | [⬅️ Back to Parent]({parent_link})"
 
     with open(readme_path, 'w', encoding='utf-8') as f:
         f.write(content)
